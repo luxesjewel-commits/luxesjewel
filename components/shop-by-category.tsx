@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Diamond } from "lucide-react";
 
 const categories = [
@@ -6,25 +7,25 @@ const categories = [
     name: "Rings",
     href: "/rings",
     description: "Statement rings to everyday bands",
-    gradient: "from-rose-50 to-pink-50",
+    image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&h=600&fit=crop",
   },
   {
     name: "Earrings",
     href: "/earrings",
     description: "Studs, drops & hoops for every style",
-    gradient: "from-violet-50 to-purple-50",
+    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop",
   },
   {
     name: "Bracelets",
     href: "/bracelets",
     description: "Tennis bracelets to delicate chains",
-    gradient: "from-amber-50 to-yellow-50",
+    image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&h=600&fit=crop",
   },
   {
     name: "Pendants",
     href: "/pendants",
     description: "Elegant pendants for every neckline",
-    gradient: "from-emerald-50 to-teal-50",
+    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop",
   },
 ];
 
@@ -50,16 +51,21 @@ export function ShopByCategory() {
             <Link
               key={category.name}
               href={category.href}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl aspect-square flex flex-col items-center justify-center p-4 sm:p-6 text-center transition-all hover:shadow-lg"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl aspect-square"
             >
-              <div
-                className={`absolute inset-0 bg-linear-to-br ${category.gradient} group-hover:scale-105 transition-transform duration-300`}
+              <Image
+                src={category.image}
+                alt={category.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 1024px) 50vw, 25vw"
               />
-              <div className="relative z-10">
-                <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
                   {category.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-muted-foreground hidden xs:block">
+                <p className="text-xs sm:text-sm text-white/80 hidden xs:block">
                   {category.description}
                 </p>
               </div>

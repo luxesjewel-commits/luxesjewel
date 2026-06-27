@@ -1,74 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Heart, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { products, formatPrice } from "@/lib/data";
 
-const products = [
-  {
-    name: "Aurora Diamond Solitaire Ring",
-    price: 42648,
-    href: "/products/aurora-diamond-solitaire-ring",
-    category: "Rings",
-    badge: "Bestseller",
-  },
-  {
-    name: "Briget Ribbon Knot Diamond Earrings",
-    price: 21555,
-    href: "/products/briget-ribbon-knot-earrings",
-    category: "Earrings",
-    badge: null,
-  },
-  {
-    name: "Classic Tennis Diamond Bracelet",
-    price: 202246,
-    href: "/products/classic-tennis-bracelet",
-    category: "Bracelets",
-    badge: "Premium",
-  },
-  {
-    name: "Spinny Twirl Diamond Pendant",
-    price: 11625,
-    href: "/products/spinny-twirl-pendant",
-    category: "Pendants",
-    badge: null,
-  },
-  {
-    name: "1 Carat Classic Solitaire Ring",
-    price: 30840,
-    href: "/products/1-carat-classic-solitaire",
-    category: "Rings",
-    badge: "Popular",
-  },
-  {
-    name: "Serpentine Diamond Band Ring For Men",
-    price: 20437,
-    href: "/products/serpentine-diamond-band-men",
-    category: "Rings",
-    badge: null,
-  },
-  {
-    name: "Linking In Love Diamond Bracelet",
-    price: 41377,
-    href: "/products/linking-in-love-bracelet",
-    category: "Bracelets",
-    badge: null,
-  },
-  {
-    name: "Elegant Halo Pear Cut Diamond Ring",
-    price: 37455,
-    href: "/products/elegant-halo-pear-cut-ring",
-    category: "Rings",
-    badge: "New",
-  },
-];
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(price);
-}
-
+const bestsellers = products.slice(0, 8);
 const tabs = ["All", "Rings", "Earrings", "Pendants", "Bracelets"];
 
 export function Bestsellers() {
@@ -101,16 +37,20 @@ export function Bestsellers() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
-          {products.map((product) => (
+          {bestsellers.map((product) => (
             <Link
               key={product.name}
-              href={product.href}
+              href={`/products/${product.slug}`}
               className="group bg-white rounded-lg sm:rounded-xl overflow-hidden border border-border/50 hover:shadow-md transition-all"
             >
-              <div className="relative aspect-square bg-linear-to-br from-secondary to-accent/20 flex items-center justify-center">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-white/60 flex items-center justify-center">
-                  <span className="text-2xl sm:text-3xl">💎</span>
-                </div>
+              <div className="relative aspect-square bg-secondary/30 overflow-hidden">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
                 {product.badge && (
                   <Badge
                     className="absolute top-2 left-2 sm:top-3 sm:left-3 text-[10px] sm:text-xs"
@@ -124,7 +64,7 @@ export function Bestsellers() {
                 </button>
               </div>
               <div className="p-2.5 sm:p-3 md:p-4">
-                <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1">
+                <p className="text-[10px] sm:text-xs text-muted-foreground mb-0.5 sm:mb-1 capitalize">
                   {product.category}
                 </p>
                 <h3 className="text-xs sm:text-sm font-medium line-clamp-2 mb-1.5 sm:mb-2 group-hover:text-primary transition-colors leading-tight">

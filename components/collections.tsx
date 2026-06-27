@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Diamond } from "lucide-react";
 
 const collections = [
@@ -6,37 +7,37 @@ const collections = [
     name: "Precious",
     description: "Jewellery in 9Kt Gold",
     href: "/collections/precious",
-    gradient: "from-amber-100 to-amber-50",
+    image: "https://images.unsplash.com/photo-1515562141589-67f0d93e2881?w=600&h=400&fit=crop",
   },
   {
     name: "Padma Cut",
     description: "Signature Cut by LuxesJewel",
     href: "/collections/padma-cut",
-    gradient: "from-rose-100 to-rose-50",
+    image: "https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?w=600&h=400&fit=crop",
   },
   {
     name: "Men's Collection",
     description: "Bold, Brilliant, Him.",
     href: "/collections/mens",
-    gradient: "from-slate-100 to-slate-50",
+    image: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600&h=400&fit=crop",
   },
   {
     name: "Secretly Yours",
     description: "Hidden Messages, Engraved Forever.",
     href: "/collections/engravable",
-    gradient: "from-violet-100 to-violet-50",
+    image: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&h=400&fit=crop",
   },
   {
     name: "Twinkle",
     description: "Fine Jewellery for Little Stars.",
     href: "/collections/kids",
-    gradient: "from-pink-100 to-pink-50",
+    image: "https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&h=400&fit=crop",
   },
   {
     name: "Infinite Radiance",
     description: "Convertible Jewellery for Every Occasion.",
     href: "/collections/convertibles",
-    gradient: "from-emerald-100 to-emerald-50",
+    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600&h=400&fit=crop",
   },
 ];
 
@@ -62,16 +63,21 @@ export function Collections() {
             <Link
               key={collection.name}
               href={collection.href}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 transition-all hover:shadow-lg"
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl aspect-4/3 sm:aspect-3/2"
             >
-              <div
-                className={`absolute inset-0 bg-linear-to-br ${collection.gradient} group-hover:scale-105 transition-transform duration-300`}
+              <Image
+                src={collection.image}
+                alt={collection.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
-              <div className="relative z-10">
-                <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-0.5 sm:mb-1">
+              <div className="absolute inset-0 bg-black/35 group-hover:bg-black/45 transition-colors" />
+              <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 md:p-6">
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-0.5">
                   {collection.name}
                 </h3>
-                <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground">
+                <p className="text-[10px] sm:text-xs md:text-sm text-white/80">
                   {collection.description}
                 </p>
               </div>
