@@ -56,7 +56,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Documentation    hiii heer here!!
+            Documentation    hiii heer here!!    updates
           </a>
         </div>
       </main>
